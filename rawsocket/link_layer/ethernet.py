@@ -65,6 +65,17 @@ class Ethernet():
         ether_type = self.mk_ether_type(ether_type_name)
         return "".join([dst_mac, src_mac, ether_type, msg])
 
+    def pad_frame(self, frame):
+        """ Make sure that frames are 60 bytes long. The ethernet spec
+        requires 64 byte frames. The 4 bytes CRC gets appended by the card.
+        https://en.wikipedia.org/wiki/Ethernet_II_framing#Runt_frames
+        """
+        if len(frame) < 60:
+            pad_len = 60 - len(frame)
+            padding = struct.pack("B", 0) * pad_len
+            frame += padding
+        return frame
+
     def sanity_check_ether_device(self):
         if not hasattr(self.ether_device, 'send'):
             raise MissingEtherDevice(
@@ -79,6 +90,7 @@ class Ethernet():
     def xmit(self, ether_proto, msg):
         self.sanity_check_ether_device()
         frame = self.mk_frame(ether_proto, msg)
+        frame = self.pad_frame(frame)
         self.log.info("EtherProto: %s: sending %s  bytes through %s" % (
             ether_proto, len(frame), self.ether_device))
         self.log.debug("Message: %s" % frame.encode("hex"))
