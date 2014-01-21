@@ -98,6 +98,7 @@ Address Resolution Protocol (reserved)
 
 Why is the payload not 123? 
 * It's just the hex encoding of the string '0x7b' which is the hex represention of the decimal 123...
+
 ```python
 hex(123)
 > '0x7b'
