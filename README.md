@@ -5,6 +5,7 @@ Is a simple experiment to try implement the basic level details (Ethernet, IP an
 
 Example: Sending a nonsensical ARP frame on my Wi-Fi. 
 -------------------------------------------------------
+Example code:
 ```python
 #!/usr/bin/env python
 
@@ -97,10 +98,10 @@ Address Resolution Protocol (reserved)
 
 Why is the payload not 123? 
 * It's just the hex encoding of the string '0x7b' which is the hex represention of the decimal 123...
-```
- In[6]  hex(123)
- Out[6]  '0x7b'
+```python
+hex(123)
+> '0x7b'
 
- In[7]  [hex(ord(a)) for a  in hex(123)]
- Out[7]  ['0x30', '0x78', '0x37', '0x62']
+[hex(ord(a)) for a  in hex(123)]
+> ['0x30', '0x78', '0x37', '0x62']
 ```
