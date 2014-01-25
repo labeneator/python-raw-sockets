@@ -1,1 +1,1 @@
-from link_layer.ethernet import Ethernet
+from link_layer.ethernet import *
