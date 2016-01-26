@@ -105,4 +105,10 @@ hex(123)
 
 [hex(ord(a)) for a  in hex(123)]
 > ['0x30', '0x78', '0x37', '0x62']
+
+Where 
+In [1]: hex(12408)
+Out[1]: '0x3078'
+
+The payload is now the hardware and protocol type
 ```
